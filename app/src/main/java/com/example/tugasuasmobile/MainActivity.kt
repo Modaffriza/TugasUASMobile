@@ -5,8 +5,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.pertemuan9.R
-import com.example.pertemuan9.databinding.ActivityMainBinding
+import com.example.tugasuasmobile.R
+import com.example.tugasuasmobile.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -23,20 +23,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupBottomNavigation() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, HomeFragment())
+            .replace(R.id.nav_host_fragment, HomeFragment()) // Updated to use nav_host_fragment
             .commit()
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragmentContainer, HomeFragment())
+                        .replace(R.id.nav_host_fragment, HomeFragment()) // Updated to use nav_host_fragment
                         .commit()
                     true
                 }
                 R.id.nav_favorite -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragmentContainer, FavoriteFragment())
+                        .replace(R.id.nav_host_fragment, FavoriteFragment()) // Updated to use nav_host_fragment
                         .commit()
                     true
                 }

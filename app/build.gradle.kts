@@ -7,14 +7,14 @@ plugins {
 }
 
 android {
-    namespace = "com.example.pertemuan9"
+    namespace = "com.example.tugasuasmobile"
     compileSdk = 34
     buildFeatures {
         viewBinding = true
     }
 
     defaultConfig {
-        applicationId = "com.example.pertemuan9"
+        applicationId = "com.example.tugasuasmobile"
         minSdk = 34
         targetSdk = 34
         versionCode = 1
