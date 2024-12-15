@@ -34,15 +34,16 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val prefManager = PrefManager.getInstance(binding.root.context)
         val dprDao = DprDatabase.getInstance(requireContext()).dprDao()
-        adapter = DprAdapter {}
+        adapter = DprAdapter(prefManager.getData())
 
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
 
-        dprDao.getAll().observe(viewLifecycleOwner) {
-            adapter.setData(it)
-        }
+//        dprDao.getAll().observe(viewLifecycleOwner) {
+//            adapter.setData(it)
+//        }
     }
 
     override fun onDestroyView() {

@@ -14,6 +14,8 @@ interface DprDao {
 
     @Query("SELECT * FROM favorite_table")
     fun getAll(): LiveData<List<Dpr>>
+    @Query("SELECT * FROM favorite_table WHERE _id= :pkey limit 1 ")
+    fun getDpr(pkey:String): Dpr?
 
     @Delete
     fun delete(dpr: Dpr)

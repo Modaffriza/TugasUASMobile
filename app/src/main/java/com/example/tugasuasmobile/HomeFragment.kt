@@ -40,11 +40,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dprDao = DprDatabase.getInstance(requireContext()).dprDao()
-
-        adapter = DprAdapter { dpr ->
-            dprDao.insert(dpr)
-            Toast.makeText(context, "Added to favorite", Toast.LENGTH_SHORT).show()
-        }
+        val prefManager = PrefManager.getInstance(binding.root.context)
+        adapter = DprAdapter(prefManager.getData())
 
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
@@ -54,7 +51,7 @@ class HomeFragment : Fragment() {
 
     private fun fetchDprData() {
         val prefManager = PrefManager.getInstance(binding.root.context)
-        adapter.setData(prefManager.getData())
+//        adapter.setData(prefManager.getData())
     }
 
     override fun onDestroyView() {
