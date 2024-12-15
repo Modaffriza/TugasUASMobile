@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.pertemuan9.R
-import com.example.pertemuan9.databinding.FragmentFavoriteBinding
+import com.example.tugasuasmobile.R
+import com.example.tugasuasmobile.databinding.FragmentFavoriteBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,7 +19,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [FavoriteFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FavoriteFragment : Fragment() {
+class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: DprAdapter

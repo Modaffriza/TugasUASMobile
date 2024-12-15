@@ -1,13 +1,28 @@
 package com.example.tugasuasmobile
 
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
 object ApiClient {
-    private const val BASE_URL = "https://ppbo-api.vercel.app/"
+    private const val BASE_URL = "https://ppbo-api.vercel.app/DxL1e/"
 
     val instance: ApiService by lazy {
-        val retrofit = retrofit2.Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(retrofit2.converter.gson.GsonConverterFactory.create())
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
+        val client = OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
             .build()
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+
         retrofit.create(ApiService::class.java)
     }
 }

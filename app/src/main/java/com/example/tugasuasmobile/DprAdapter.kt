@@ -3,7 +3,7 @@ package com.example.tugasuasmobile
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pertemuan9.databinding.ItemDprBinding
+import com.example.tugasuasmobile.databinding.ItemDprBinding
 import com.bumptech.glide.Glide
 
 class DprAdapter(private val onFavoriteClick: (Dpr) -> Unit) : RecyclerView.Adapter<DprAdapter.DprViewHolder>() {
@@ -12,12 +12,18 @@ class DprAdapter(private val onFavoriteClick: (Dpr) -> Unit) : RecyclerView.Adap
     inner class DprViewHolder(private val binding: ItemDprBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(dpr: Dpr) {
             with(binding) {
-                txtName.text = dpr.name
-                Glide.with(itemView).load(dpr.photo).into(imgPhoto)
+                txtName.text = dpr.nama
+                Glide.with(itemView.context)
+                    .load(dpr.fotoUrl)
+                    .placeholder(R.drawable.placeholder_image) // Add a placeholder
+                    .error(R.drawable.error_image) // Add an error image
+                    .into(imgPhoto)
                 btnFavorite.setOnClickListener { onFavoriteClick(dpr) }
             }
         }
+
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DprViewHolder {
         val binding = ItemDprBinding.inflate(LayoutInflater.from(parent.context), parent, false)
