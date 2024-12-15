@@ -1,6 +1,7 @@
 package com.example.tugasuasmobile
 
 import android.content.Context
+import com.google.gson.Gson
 
 class PrefManager private constructor(context: Context) {
     private val sharedPreferences =
@@ -22,6 +23,16 @@ class PrefManager private constructor(context: Context) {
 
     fun setLoggedIn(isLoggedIn: Boolean) {
         sharedPreferences.edit().putBoolean(KEY_IS_LOGGED_IN, isLoggedIn).apply()
+    }
+    fun saveData(dprs : List<Dpr>){
+        val editor = sharedPreferences.edit()
+        editor.putString("Dpr", Gson().toJson(dprs))
+        editor.apply()
+    }
+
+    fun getData(): List<Dpr> {
+        val data = sharedPreferences.getString("Dpr", "").orEmpty()
+        return Gson().fromJson(data, Array<Dpr>::class.java).toList()
     }
 
     fun isLoggedIn(): Boolean {

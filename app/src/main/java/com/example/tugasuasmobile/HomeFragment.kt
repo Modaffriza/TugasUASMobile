@@ -1,7 +1,6 @@
 package com.example.tugasuasmobile
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -54,30 +53,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun fetchDprData() {
-        Log.d("HomeFragment", "Starting fetchDprData...")
-
-        ApiClient.instance.getDpr().enqueue(object : Callback<List<Dpr>> {
-            override fun onResponse(call: Call<List<Dpr>>, response: Response<List<Dpr>>) {
-                if (response.isSuccessful) {
-                    val data = response.body()
-                    if (data != null) {
-                        Log.d("HomeFragment", "Fetched ${data.size} items from API")
-                        adapter.setData(data)
-                    } else {
-                        Log.e("HomeFragment", "Response body is null")
-                    }
-                } else {
-                    Log.e("HomeFragment", "API response failed: ${response.message()}")
-                }
-            }
-
-            override fun onFailure(call: Call<List<Dpr>>, t: Throwable) {
-                Log.e("HomeFragment", "API call failed: ${t.message}")
-                Toast.makeText(context, "Failed to fetch data: ${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
+        val prefManager = PrefManager.getInstance(binding.root.context)
+        adapter.setData(prefManager.getData())
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -13,10 +13,9 @@ class DprAdapter(private val onFavoriteClick: (Dpr) -> Unit) : RecyclerView.Adap
         fun bind(dpr: Dpr) {
             with(binding) {
                 txtName.text = dpr.nama
-                Glide.with(itemView.context)
+                txtPartai.text = dpr.partai
+                Glide.with(binding.root.context)
                     .load(dpr.fotoUrl)
-                    .placeholder(R.drawable.placeholder_image) // Add a placeholder
-                    .error(R.drawable.error_image) // Add an error image
                     .into(imgPhoto)
                 btnFavorite.setOnClickListener { onFavoriteClick(dpr) }
             }
