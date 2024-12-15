@@ -4,6 +4,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface ApiService {
-    @GET("/DxL1e/")
+    @GET("uasmobile")
     fun getDpr(): Call<List<Dpr>>
 }

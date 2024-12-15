@@ -18,4 +18,6 @@
     <!-- Background colors -->
     <color name="background">#FFFFFF</color>
     <color name="background_dark">#F5F5F5</color>
+    <color name="background_light">#F5F5F5</color>
+
 </resources>
