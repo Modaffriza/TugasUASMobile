@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-12-15T04:34:34.393210900Z">
+        <DropdownSelection timestamp="2024-12-15T09:10:21.804632800Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=872cd44f" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\Device Affriza MD\.android\avd\Small_Phone_API_35.avd" />
             </handle>
           </Target>
         </DropdownSelection>
