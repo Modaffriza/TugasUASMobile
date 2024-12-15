@@ -20,4 +20,7 @@
     <color name="background_dark">#F5F5F5</color>
     <color name="background_light">#F5F5F5</color>
 
+
+    <color name="topcolor">#5F2719</color>
+
 </resources>

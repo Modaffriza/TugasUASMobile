@@ -64,12 +64,12 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(p0: Call<List<Dpr>>, p1: Response<List<Dpr>>) {
                 prefManager.saveData(p1.body()!!)
                 println(p1.body()!!.toString())
-                Toast.makeText(binding.root.context, p1.body()!!.toString(), Toast.LENGTH_SHORT).show()
+//                Toast.makeText(binding.root.context, p1.body()!!.toString(), Toast.LENGTH_SHORT).show()
 
             }
 
             override fun onFailure(p0: Call<List<Dpr>>, p1: Throwable) {
-                Toast.makeText(binding.root.context, "Fetch Cupu", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(binding.root.context, "Fetch Cupu", Toast.LENGTH_SHORT).show()
             }
 
         })

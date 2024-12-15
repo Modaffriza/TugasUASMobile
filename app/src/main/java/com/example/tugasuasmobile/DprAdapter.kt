@@ -51,7 +51,7 @@ class DprAdapter(var dprs:List<Dpr>) : RecyclerView.Adapter<DprAdapter.DprViewHo
                     .load(dpr.fotoUrl)
                     .into(imgPhoto)
                 btnFavorite.setOnClickListener {
-                    Toast.makeText(binding.root.context, "kepencet", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(binding.root.context, "Berhasil melakukan perubahan", Toast.LENGTH_SHORT).show()
                     favoriting(dpr) }
             }
             refresh(dpr._id)
