@@ -31,8 +31,13 @@ class PrefManager private constructor(context: Context) {
     }
 
     fun getData(): List<Dpr> {
+
         val data = sharedPreferences.getString("Dpr", "").orEmpty()
-        return Gson().fromJson(data, Array<Dpr>::class.java).toList()
+        return if (data.isNullOrEmpty()) {
+            emptyList() // Return an empty list if data is null or empty
+        } else {
+            Gson().fromJson(data, Array<Dpr>::class.java).toList()
+        }
     }
 
     fun isLoggedIn(): Boolean {
