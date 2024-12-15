@@ -2,6 +2,7 @@ package com.example.tugasuasmobile
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tugasuasmobile.databinding.ItemDprBinding
 import com.bumptech.glide.Glide
@@ -17,6 +18,18 @@ class DprAdapter(var dprs:List<Dpr>) : RecyclerView.Adapter<DprAdapter.DprViewHo
             executorService = Executors.newSingleThreadExecutor()
             val dprDatabase = DprDatabase.getInstance(binding.root.context)
             dprDao = dprDatabase!!.dprDao()!!
+        }
+        fun favoriting(dpr: Dpr){
+            executorService.execute(){
+                val dprVal = dprDao.getDpr(dpr._id)
+                println(dprVal.toString())
+                if(dprVal==null){
+                    dprDao.insert(dpr)
+                } else{
+                    dprDao.delete(dprVal)
+                }
+            }
+            refresh(dpr._id)
         }
 
 
@@ -37,7 +50,23 @@ class DprAdapter(var dprs:List<Dpr>) : RecyclerView.Adapter<DprAdapter.DprViewHo
                 Glide.with(binding.root.context)
                     .load(dpr.fotoUrl)
                     .into(imgPhoto)
-//                btnFavorite.setOnClickListener { onFavoriteClick(dpr) }
+                btnFavorite.setOnClickListener {
+                    Toast.makeText(binding.root.context, "kepencet", Toast.LENGTH_SHORT).show()
+                    favoriting(dpr) }
+            }
+            refresh(dpr._id)
+        }
+
+        fun refresh(pkey: String){
+            executorService.execute(){
+                var dprVal = dprDao.getDpr(pkey)
+                with(binding){
+                    if(dprVal==null){
+                        btnFavorite.setImageResource(R.drawable.ic_unfavorited)
+                    } else{
+                        btnFavorite.setImageResource(R.drawable.ic_favorite)
+                    }
+                }
             }
         }
 

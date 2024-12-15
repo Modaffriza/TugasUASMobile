@@ -9,7 +9,7 @@ import androidx.room.Query
 
 @Dao
 interface DprDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.NONE)
     fun insert(dpr: Dpr)
 
     @Query("SELECT * FROM favorite_table")

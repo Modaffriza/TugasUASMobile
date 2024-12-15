@@ -8,6 +8,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tugasuasmobile.R
 import com.example.tugasuasmobile.databinding.FragmentFavoriteBinding
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,6 +29,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
     private val binding get() = _binding!!
     private lateinit var adapter: DprAdapter
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,11 +42,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
         super.onViewCreated(view, savedInstanceState)
         val prefManager = PrefManager.getInstance(binding.root.context)
         val dprDao = DprDatabase.getInstance(requireContext()).dprDao()
-        adapter = DprAdapter(prefManager.getData())
-
-        binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        binding.recyclerView.adapter = adapter
-
+        refresh()
 //        dprDao.getAll().observe(viewLifecycleOwner) {
 //            adapter.setData(it)
 //        }
@@ -50,4 +52,28 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
         super.onDestroyView()
         _binding = null
     }
-}
+    @OptIn(DelicateCoroutinesApi::class)
+    fun refresh(){
+            val database = DprDatabase.getInstance(binding.root.context)
+            val dao = database!!.dprDao()!!
+            val prefManager = PrefManager.getInstance(binding.root.context)
+            GlobalScope.launch(Dispatchers.IO) {
+                val data = prefManager.getData().filter { item ->
+                    dao.getDpr(item._id) != null
+                }
+
+                withContext(Dispatchers.Main) {
+                    val padapter = DprAdapter(
+                        data
+                    )
+                    with(binding){
+                        recyclerView.apply {
+                            adapter = padapter
+                            layoutManager= LinearLayoutManager(binding.root.context)
+                        }
+                    }
+                }
+            }
+        }
+    }
+

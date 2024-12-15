@@ -36,13 +36,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_home -> {
+                R.id.homeFragment -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.nav_host_fragment, HomeFragment()) // Updated to use nav_host_fragment
                         .commit()
                     true
                 }
-                R.id.nav_favorite -> {
+                R.id.favoriteFragment -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.nav_host_fragment, FavoriteFragment()) // Updated to use nav_host_fragment
                         .commit()
